@@ -5,7 +5,7 @@ public class demo {
     public static void main(String[] args) {
         switch (args[0]){
             case "zip":
-                Zip zip = new Zip(args[1]);
+                Zip zip = new Zip(args[1] , args[2]);
                 break;
             case "unzip":
                 UnZip unZip = new UnZip(args[1]);
