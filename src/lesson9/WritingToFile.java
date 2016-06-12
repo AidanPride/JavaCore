@@ -10,7 +10,7 @@ public class WritingToFile {
     public static void main(String[] args) {
         File file = new File("test.txt");
 
-        String text = "Hellow World! :) Hello Java";
+        String text = "Hellow World! :) Hello Java!!!";
         try (
                 FileOutputStream fos = new FileOutputStream(file.getName());
                 PrintStream printStream = new PrintStream(fos)
