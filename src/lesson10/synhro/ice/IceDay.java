@@ -13,7 +13,7 @@ public class IceDay {
         final SkatingRing skatingRing = new SchoolSkatingRing();
 
         final Random random = new Random();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1000; i++) {
             final Skater skater = new Skater("Skater" + i);
             new Thread(new Runnable() {
                 @Override
