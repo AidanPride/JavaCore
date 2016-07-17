@@ -1,8 +1,7 @@
 package lesson10.synhro.ice;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
 
 
 public class IceDay {
@@ -11,20 +10,33 @@ public class IceDay {
         System.out.println("Ice day start");
 
         final SkatingRing skatingRing = new SchoolSkatingRing();
-
+        final CountDownLatch countDownLatch = new CountDownLatch(3);
         final Random random = new Random();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 10; i++) {
             final Skater skater = new Skater("Skater" + i);
-            new Thread(new Runnable() {
+            Thread thread =  new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Skates skates = skatingRing.getSkates(skater);
-                    sleep(random.nextInt(3000));
+
+                        Skates skates = skatingRing.getSkates(skater);
+                    try {
+                        countDownLatch.await();
+                    }catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
+                        sleep(random.nextInt(2000));
+
+
                     skatingRing.returnSkates(skates, skater);
                 }
-            }).start();
+            });
+            thread.start();
+            countDownLatch.countDown();
+
+
             sleep(random.nextInt(1000));
         }
+
     }
 
     public static void sleep(int timeOut){
